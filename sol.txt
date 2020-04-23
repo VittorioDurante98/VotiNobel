@@ -1,0 +1,55 @@
+ Input: 
+  -insieme di esame (partenza)
+  -* di crediti (m)
+ Output:
+  -set di esame, sottoinsieme di partenza, tale per cui
+    * somma esame.crediti == m
+    * media esame.voto sia max
+
+Approccio 1: generare i sottoinsiemi di partenza 1 caso per volta, decidendo
+esame per esame, se deve o non deve far parte della soluzione
+
+*Livello della ricorsione L mi indica quale corso sto decidendo di
+mettere o non mettere
+
+ elemento 1 dell'insieme (livello 0)
+  -lo inserisco -> parziale = e1
+    elemento 2 dell'insieme (livello 1)
+     -lo inserisco -> parziale= e1, e2
+     -non lo inserisco
+  -non lo inserisco -> parziale = ()
+   elemento 2dell'insieme (livello 1)
+     -lo inserisco -> parziale = e2
+     -non lo inserisco -> parziale = ()
+    
+    
+*Soluzione parziale == un sottoinsieme composto dagli esami 
+tra 0 e (L-1)
+
+*Generazione di un sottoprolema a livello L: 
+decidere se inserire esami(L) oppure no
+
+*Casi terminali
+  -L = Max -> non ci sono più corsi da aggiungere
+     *se parziale.sommaCrediti() == m -> calcolaare la media
+        *se parziale.media() > media di tutte le altre soluzioni viste 
+         finora, allora dovrò tenere traccia di questa soluzione    
+     *se parziale.sommaCrediti() != m -> lascio la soluzione
+     
+  -se parziale.sommaCrediti() > m -> mi fermo! è inutile
+   continuare ad aggiungere altri esami 
+  
+  -se parziale.sommaCrediti() == m-> calcolo la media  
+     
+Approccio 2: 
+ad ogni livello aggiungo un corso, devo decidere quale.
+Ad ogni livello L , la sol parziale sarà un sottoinsieme
+di esattamente L esami
+
+*Generazione di un sottoprolema: aggiunta di un nuovo esame alla soluzionee 
+parziale. Per tutti i casi poss :
+   sottoprolema: parziale + esame i
+
+
+
+     
